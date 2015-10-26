@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -35,17 +37,22 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ImageView ivProfilePicture = (ImageView) convertView.findViewById(R.id.ivProfilePicture);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         //insert the model data into each of the view items
+
         tvCaption.setText(photo.caption);
         //clear out the image view (if the view is recycled)
         ivPhoto.setImageResource(0);
         tvUsername.setText(photo.username);
         //insert the image using picasso
         Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
-        // insert profile photo with picasso
-
-
+        // insert profile photo with picasso and round it
+        Transformation transformation = new RoundedTransformationBuilder()
+                                                .borderColor(R.color.profile_photo_outline)
+                                                .borderWidthDp(1)
+                                                .cornerRadiusDp(30)
+                                                .oval(false)
+                                                .build();
         ivProfilePicture.setImageResource(0);
-        Picasso.with(getContext()).load(photo.userProfilePictureUrl).into(ivProfilePicture);
+        Picasso.with(getContext()).load(photo.userProfilePictureUrl).fit().transform(transformation).into(ivProfilePicture);
 
         //return the created item as a view
         return convertView;
