@@ -53,7 +53,7 @@ public class PhotoStreamActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //iterate through each item and decode the item into a java object
-                JSONArray photosJSON = null;
+                JSONArray photosJSON;
                 try {
                     photosJSON = response.getJSONArray("data"); // array of posts
                     //iterate array of posts
@@ -65,6 +65,7 @@ public class PhotoStreamActivity extends AppCompatActivity {
                         photo.username = photoJSON.getJSONObject("user").getString("username");
                         photo.userProfilePictureUrl = photoJSON.getJSONObject("user").getString("profile_picture");
                         photo.caption = photoJSON.getJSONObject("caption").getString("text");
+                        photo.createdAt = Long.parseLong(photoJSON.getJSONObject("caption").getString("created_time"));
                         photo.type = photoJSON.getString("type");
                         photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                         photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");

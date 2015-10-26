@@ -1,6 +1,7 @@
 package wszolek.lauren.instagramphotoviewer;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,9 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         ImageView ivProfilePicture = (ImageView) convertView.findViewById(R.id.ivProfilePicture);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+        TextView tvCreatedAt = (TextView) convertView.findViewById(R.id.tvCreatedAt);
         //insert the model data into each of the view items
-
+        tvCreatedAt.setText(getRelativeTime(photo.createdAt));
         tvCaption.setText(photo.caption);
         //clear out the image view (if the view is recycled)
         ivPhoto.setImageResource(0);
@@ -56,5 +58,9 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         //return the created item as a view
         return convertView;
+    }
+
+    private String getRelativeTime(Long timeSince) {
+        return DateUtils.getRelativeTimeSpanString(timeSince * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
     }
 }

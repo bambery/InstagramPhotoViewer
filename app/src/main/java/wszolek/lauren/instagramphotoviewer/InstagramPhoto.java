@@ -1,8 +1,5 @@
 package wszolek.lauren.instagramphotoviewer;
 
-/**
- * Created by lwszolek on 10/23/15.
- */
 public class InstagramPhoto {
     public String username;
     public String userProfilePictureUrl;
@@ -11,4 +8,5 @@ public class InstagramPhoto {
     public String type;
     public int imageHeight;
     public int likesCount;
+    public Long createdAt;
 }

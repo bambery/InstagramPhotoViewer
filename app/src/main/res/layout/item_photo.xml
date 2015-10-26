@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time since"
-        android:id="@+id/tvTimeSince"
+        android:id="@+id/tvCreatedAt"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:textSize="15sp"
