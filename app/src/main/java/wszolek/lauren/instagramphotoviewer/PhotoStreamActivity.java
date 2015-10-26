@@ -1,7 +1,9 @@
 package wszolek.lauren.instagramphotoviewer;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 public class PhotoStreamActivity extends AppCompatActivity {
-
+    private SwipeRefreshLayout swipeContainer;
     public static final String CLIENT_ID = "05981384d8514fcb91f0481ac7a56fae";
     private ArrayList<InstagramPhoto> photos;
     private InstagramPhotosAdapter aPhotos;
@@ -30,7 +32,6 @@ public class PhotoStreamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_stream);
         // send out api request to instagram to get the popular photos
         photos = new ArrayList<>();
-
         //create the adapter linking it to the source
         aPhotos = new InstagramPhotosAdapter(this, photos);
         // find the listview from the layout
@@ -39,6 +40,23 @@ public class PhotoStreamActivity extends AppCompatActivity {
         lvPhotos.setAdapter(aPhotos);
         // fetch the popular photos
         fetchPopularPhotos();
+
+        // set up refresh listener for swipe to update
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i("inside on refresh", "onRefresh called from SwipeRefreshLayout");
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchPopularPhotos();
+            }
+        });
+
+
+
+
     }
 
     //trigger api request
@@ -56,6 +74,8 @@ public class PhotoStreamActivity extends AppCompatActivity {
                 JSONArray photosJSON;
                 try {
                     photosJSON = response.getJSONArray("data"); // array of posts
+                    //clear out old items before adding new ones on refresh
+                    aPhotos.clear();
                     //iterate array of posts
                     for (int i = 0; i < photosJSON.length(); i++){
                         // get the JSON object at position i in the array
@@ -72,6 +92,8 @@ public class PhotoStreamActivity extends AppCompatActivity {
                         photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
                         // add decoded object to the photos array
                         photos.add(photo);
+                        // signal refresh has completed
+                        swipeContainer.setRefreshing(false);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
