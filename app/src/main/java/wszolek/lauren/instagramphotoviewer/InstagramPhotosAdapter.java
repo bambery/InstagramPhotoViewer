@@ -45,7 +45,10 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ivPhoto.setImageResource(0);
         tvUsername.setText(photo.username);
         //insert the image using picasso
-        Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
+        Picasso.with(getContext())
+                .load(photo.imageUrl)
+                .placeholder(R.drawable.placeholder)
+                .into(ivPhoto);
         // insert profile photo with picasso and round it
         Transformation transformation = new RoundedTransformationBuilder()
                                                 .borderColor(R.color.profile_photo_outline)
@@ -54,7 +57,11 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                                                 .oval(false)
                                                 .build();
         ivProfilePicture.setImageResource(0);
-        Picasso.with(getContext()).load(photo.userProfilePictureUrl).fit().transform(transformation).into(ivProfilePicture);
+        Picasso.with(getContext())
+                .load(photo.userProfilePictureUrl)
+                .fit()
+                .transform(transformation)
+                .into(ivProfilePicture);
 
         //return the created item as a view
         return convertView;
