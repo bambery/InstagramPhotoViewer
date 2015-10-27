@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="profile_photo_outline">#d3d3d3</color>
+    <color name="pale_grey">#d3d3d3</color>
+    <color name="dark_navy">#003366</color>
+    <color name="dark_grey">#66686B</color>
 </resources>

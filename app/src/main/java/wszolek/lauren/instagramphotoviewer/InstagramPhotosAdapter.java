@@ -38,6 +38,10 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ImageView ivProfilePicture = (ImageView) convertView.findViewById(R.id.ivProfilePicture);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         TextView tvCreatedAt = (TextView) convertView.findViewById(R.id.tvCreatedAt);
+        // add clock icon for time posted
+        ImageView ivClockIcon = (ImageView) convertView.findViewById(R.id.ivClockIcon);
+        ivClockIcon.setColorFilter(R.color.pale_grey);
+        ivClockIcon.setImageResource(R.drawable.ic_action_clock);
         //insert the model data into each of the view items
         tvCreatedAt.setText(getRelativeTime(photo.createdAt));
         tvCaption.setText(photo.caption);
@@ -51,7 +55,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                 .into(ivPhoto);
         // insert profile photo with picasso and round it
         Transformation transformation = new RoundedTransformationBuilder()
-                                                .borderColor(R.color.profile_photo_outline)
+                                                .borderColor(R.color.pale_grey)
                                                 .borderWidthDp(1)
                                                 .cornerRadiusDp(30)
                                                 .oval(false)
