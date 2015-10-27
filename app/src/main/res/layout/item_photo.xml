@@ -102,12 +102,20 @@
         android:textColor="@color/dark_grey"
         android:layout_marginLeft="@dimen/non_photo_side_padding"
         android:layout_marginBottom="@dimen/comment_spacer"/>
-
+    <TextView
+        android:id="@+id/tvCommentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/non_photo_side_padding"
+        android:layout_marginBottom="@dimen/comment_spacer"
+        android:layout_below="@+id/tvCaption"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/pale_grey"/>
     <TextView
         android:id="@+id/tvLastComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvCaption"
+        android:layout_below="@+id/tvCommentCount"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="@dimen/comment_spacer"
         android:layout_marginLeft="@dimen/non_photo_side_padding"

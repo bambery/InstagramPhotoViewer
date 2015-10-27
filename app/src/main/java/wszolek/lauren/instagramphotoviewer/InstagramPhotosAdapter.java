@@ -92,6 +92,11 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         String captionText = getCaptionText(photo.username, photo.caption);
         tvCaption.setText(Html.fromHtml(captionText));
 
+        // comment count
+        TextView tvCommentCount = (TextView) convertView.findViewById(R.id.tvCommentCount);
+        String commentCountText = getCommentCountText(photo.commentCount);
+        tvCommentCount.setText(commentCountText);
+
         //last comment
         TextView tvLastComment = (TextView) convertView.findViewById(R.id.tvLastComment);
         String lastCommentText = getCaptionText(photo.lastCommentUsername, photo.lastCommentText);
@@ -127,6 +132,9 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 //        }
 //        return null;
 //    }
+    private String getCommentCountText(int commentCount){
+        return "View all " + Integer.toString(commentCount) + " comments";
+    }
 
     private String getRelativeTime(Long timeSince) {
         return DateUtils.getRelativeTimeSpanString(timeSince * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
