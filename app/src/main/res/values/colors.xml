@@ -4,4 +4,5 @@
     <color name="dark_navy">#003366</color>
     <color name="dark_grey">#66686B</color>
     <color name="white">#ffffff</color>
+    <color name="blue_action_bar">#005C7A</color>
 </resources>
