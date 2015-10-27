@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
     <ImageView
         android:id="@+id/ivProfilePicture"
@@ -12,7 +13,8 @@
         android:minHeight="30dp"
         android:layout_alignParentTop="true"
         android:minWidth="30dp"
-        android:layout_margin="7dp"/>
+        android:layout_margin="@dimen/non_photo_side_padding"
+        android:cropToPadding="false"/>
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
@@ -24,7 +26,8 @@
         android:layout_alignBottom="@+id/ivProfilePicture"
         android:layout_alignTop="@+id/ivProfilePicture"
         android:gravity="center_vertical"
-        android:textColor="@color/dark_navy"/>
+        android:textColor="@color/dark_navy"
+        android:layout_marginTop="@dimen/non_photo_side_padding"/>
 
     <ImageView
         android:id="@+id/ivClockIcon"
@@ -32,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/tvCreatedAt"
         android:layout_alignTop="@+id/tvCreatedAt"
-        android:layout_alignBottom="@+id/tvCreatedAt"/>
+        android:layout_alignBottom="@+id/tvCreatedAt"
+        android:layout_marginTop="@dimen/non_photo_side_padding"/>
     <TextView
         android:id="@+id/tvCreatedAt"
         android:layout_width="wrap_content"
@@ -44,8 +48,9 @@
         android:layout_alignBottom="@+id/ivProfilePicture"
         android:layout_alignTop="@+id/ivProfilePicture"
         android:gravity="center_vertical"
-        android:layout_marginRight="7dp"
-        android:textColor="@color/pale_grey"/>
+        android:layout_marginRight="@dimen/non_photo_side_padding"
+        android:textColor="@color/pale_grey"
+        android:layout_marginTop="@dimen/non_photo_side_padding"/>
 
     <ImageView
         android:id="@+id/ivPhoto"
@@ -58,17 +63,37 @@
         android:minHeight="50dp"
         android:layout_below="@+id/ivProfilePicture"/>
 
+    <ImageView
+        android:id="@+id/ivLikeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPhoto"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/non_photo_side_padding"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvLikeCount"
+        android:text="like count"
+        android:layout_toRightOf="@+id/ivLikeIcon"
+        android:layout_alignTop="@+id/ivLikeIcon"
+        android:layout_alignBottom="@+id/ivLikeIcon"
+        android:layout_toEndOf="@+id/ivLikeIcon"
+        android:textColor="@color/dark_navy"
+        android:gravity="center_vertical"/>
+
     <TextView
         android:id="@+id/tvCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:textSize="20sp"
         android:maxLines="3"
         android:ellipsize="end"
-        android:layout_below="@+id/ivPhoto"
+        android:layout_below="@+id/ivLikeIcon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="@color/dark_grey"/>
+        android:textColor="@color/dark_grey"
+        android:layout_marginLeft="@dimen/non_photo_side_padding"/>
 
 </RelativeLayout>

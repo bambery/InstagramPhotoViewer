@@ -1,6 +1,7 @@
 package wszolek.lauren.instagramphotoviewer;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,22 +33,41 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
         }
-        // lookup views for populating in data (image, caption)
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+
         ImageView ivProfilePicture = (ImageView) convertView.findViewById(R.id.ivProfilePicture);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
-        TextView tvCreatedAt = (TextView) convertView.findViewById(R.id.tvCreatedAt);
-        // add clock icon for time posted
-        ImageView ivClockIcon = (ImageView) convertView.findViewById(R.id.ivClockIcon);
-        ivClockIcon.setColorFilter(R.color.pale_grey);
-        ivClockIcon.setImageResource(R.drawable.ic_action_clock);
-        //insert the model data into each of the view items
-        tvCreatedAt.setText(getRelativeTime(photo.createdAt));
-        tvCaption.setText(photo.caption);
-        //clear out the image view (if the view is recycled)
-        ivPhoto.setImageResource(0);
         tvUsername.setText(photo.username);
+
+
+        // add clock icon and set the color
+        ImageView ivClockIcon = (ImageView) convertView.findViewById(R.id.ivClockIcon);
+        ivClockIcon.setImageResource(0);
+        ivClockIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.pale_grey));
+        ivClockIcon.setImageResource(R.drawable.ic_action_clock);
+
+        // time posted
+        TextView tvCreatedAt = (TextView) convertView.findViewById(R.id.tvCreatedAt);
+        tvCreatedAt.setText(getRelativeTime(photo.createdAt));
+
+        // like count icon & set color
+        ImageView ivLikeIcon = (ImageView) convertView.findViewById(R.id.ivLikeIcon);
+        ivLikeIcon.setImageResource(0);
+        ivLikeIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.dark_navy));
+        ivLikeIcon.setImageResource(R.drawable.ic_action_heart);
+
+        // like count
+        TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
+        String likeString = Integer.toString(photo.likesCount) + " likes";
+        tvLikeCount.setText(likeString);
+
+        //image caption
+        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+        tvCaption.setText(photo.caption);
+
+        // photo
+        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        // clear out the image view (if the view is recycled for the photo)
+        ivPhoto.setImageResource(0);
         //insert the image using picasso
         Picasso.with(getContext())
                 .load(photo.imageUrl)
@@ -70,6 +90,17 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         //return the created item as a view
         return convertView;
     }
+
+//    private void displayLikes(int likeCount) {
+//
+//    }
+//
+//    private String getLikesString(int likeCount) {
+//        if(likeCount == 0){
+//            return "";
+//        }
+//        return null;
+//    }
 
     private String getRelativeTime(Long timeSince) {
         return DateUtils.getRelativeTimeSpanString(timeSince * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
