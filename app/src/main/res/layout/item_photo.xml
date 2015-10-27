@@ -103,4 +103,13 @@
         android:layout_marginLeft="@dimen/non_photo_side_padding"
         android:layout_marginBottom="@dimen/non_photo_side_padding"/>
 
+    <TextView
+        android:id="@+id/tvLastComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCaption"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/non_photo_side_padding"
+        android:layout_marginLeft="@dimen/non_photo_side_padding"/>
+
 </RelativeLayout>

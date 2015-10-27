@@ -77,11 +77,6 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         String likeString = getLikesString(photo);
         tvLikeCount.setText(likeString);
 
-        //image caption
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        String captionText = getCaptionText(photo);
-        tvCaption.setText(Html.fromHtml(captionText));
-
         // photo
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         // clear out the image view (if the view is recycled for the photo)
@@ -91,6 +86,16 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                 .load(photo.imageUrl)
                 .placeholder(R.drawable.placeholder)
                 .into(ivPhoto);
+
+        //image caption
+        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+        String captionText = getCaptionText(photo.username, photo.caption);
+        tvCaption.setText(Html.fromHtml(captionText));
+
+        //last comment
+        TextView tvLastComment = (TextView) convertView.findViewById(R.id.tvLastComment);
+        String lastCommentText = getCaptionText(photo.lastCommentUsername, photo.lastCommentText);
+        tvLastComment.setText(Html.fromHtml(lastCommentText));
 
         //return the created item as a view
         return convertView;
@@ -105,12 +110,12 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         }
     }
 
-    private String getCaptionText(InstagramPhoto photo) {
+    private String getCaptionText(String username, String text) {
         return "<b><font color = "
                        + ContextCompat.getColor(getContext(), R.color.dark_navy)
-                       + ">" + photo.username
+                       + ">" + username
                        + "</b></font> "
-                       + photo.caption;
+                       + text;
     }
 //        if(likeCount == 0){
 //            return "";

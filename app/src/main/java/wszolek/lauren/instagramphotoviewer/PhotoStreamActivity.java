@@ -90,6 +90,21 @@ public class PhotoStreamActivity extends AppCompatActivity {
                         photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                         photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                         photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
+                        // let's just do the first one
+                        photo.lastCommentUsername = photoJSON.getJSONObject("comments")
+                                                        .getJSONArray("data")
+                                                        .getJSONObject(0)
+                                                        .getJSONObject("from")
+                                                        .getString("username");
+                        photo.lastCommentText = photoJSON.getJSONObject("comments")
+                                                        .getJSONArray("data")
+                                                        .getJSONObject(0)
+                                                        .getString("text");
+
+                        //if I ever wanted to handle all of the comments, start here
+                        //let's get the comments
+                        //photo.recentComments = photoJSON.getJSONObject("comments").getJSONArray("data");
+
                         // add decoded object to the photos array
                         photos.add(photo);
                         // signal refresh has completed
