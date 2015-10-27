@@ -2,6 +2,7 @@ package wszolek.lauren.instagramphotoviewer;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +35,28 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
         }
 
+        //profile photo
         ImageView ivProfilePicture = (ImageView) convertView.findViewById(R.id.ivProfilePicture);
+        ivProfilePicture.setImageResource(0);
+        // create transform to round the photo
+        Transformation transformation = new RoundedTransformationBuilder()
+                                                .borderColor(R.color.pale_grey)
+                                                .borderWidthDp(1)
+                                                .cornerRadiusDp(30)
+                                                .oval(false)
+                                                .build();
+        // insert profile photo with transform
+        Picasso.with(getContext())
+                .load(photo.userProfilePictureUrl)
+                .fit()
+                .transform(transformation)
+                .into(ivProfilePicture);
+
+        // username
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         tvUsername.setText(photo.username);
 
-
-        // add clock icon and set the color
+        // clock icon and set the color
         ImageView ivClockIcon = (ImageView) convertView.findViewById(R.id.ivClockIcon);
         ivClockIcon.setImageResource(0);
         ivClockIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.pale_grey));
@@ -57,12 +74,13 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         // like count
         TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
-        String likeString = Integer.toString(photo.likesCount) + " likes";
+        String likeString = getLikesString(photo);
         tvLikeCount.setText(likeString);
 
         //image caption
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        tvCaption.setText(photo.caption);
+        String captionText = getCaptionText(photo);
+        tvCaption.setText(Html.fromHtml(captionText));
 
         // photo
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
@@ -73,29 +91,27 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                 .load(photo.imageUrl)
                 .placeholder(R.drawable.placeholder)
                 .into(ivPhoto);
-        // insert profile photo with picasso and round it
-        Transformation transformation = new RoundedTransformationBuilder()
-                                                .borderColor(R.color.pale_grey)
-                                                .borderWidthDp(1)
-                                                .cornerRadiusDp(30)
-                                                .oval(false)
-                                                .build();
-        ivProfilePicture.setImageResource(0);
-        Picasso.with(getContext())
-                .load(photo.userProfilePictureUrl)
-                .fit()
-                .transform(transformation)
-                .into(ivProfilePicture);
 
         //return the created item as a view
         return convertView;
     }
 
-//    private void displayLikes(int likeCount) {
-//
-//    }
-//
-//    private String getLikesString(int likeCount) {
+    // no this is not ideal
+    private String getLikesString(InstagramPhoto photo) {
+        if(photo.likesCount == 1){
+            return Integer.toString(photo.likesCount) + "like";
+        } else {
+            return Integer.toString(photo.likesCount) + " likes";
+        }
+    }
+
+    private String getCaptionText(InstagramPhoto photo) {
+        return "<b><font color = "
+                       + ContextCompat.getColor(getContext(), R.color.dark_navy)
+                       + ">" + photo.username
+                       + "</b></font> "
+                       + photo.caption;
+    }
 //        if(likeCount == 0){
 //            return "";
 //        }
