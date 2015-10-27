@@ -97,6 +97,11 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         String lastCommentText = getCaptionText(photo.lastCommentUsername, photo.lastCommentText);
         tvLastComment.setText(Html.fromHtml(lastCommentText));
 
+        //cheating - second to last comment
+        TextView tvSecondToLastComment = (TextView) convertView.findViewById(R.id.tvSecondToLastComment);
+        String secondToLastCommentText = getCaptionText(photo.secondToLastCommentUsername, photo.secondToLastCommentText);
+        tvSecondToLastComment.setText(Html.fromHtml(secondToLastCommentText));
+
         //return the created item as a view
         return convertView;
     }

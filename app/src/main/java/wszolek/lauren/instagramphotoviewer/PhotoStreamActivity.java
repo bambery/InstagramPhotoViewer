@@ -90,7 +90,9 @@ public class PhotoStreamActivity extends AppCompatActivity {
                         photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                         photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                         photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
-                        // let's just do the first one
+                        // comments
+                        photo.commentCount = photoJSON.getJSONObject("comments").getInt("count");
+                        // first comment
                         photo.lastCommentUsername = photoJSON.getJSONObject("comments")
                                                         .getJSONArray("data")
                                                         .getJSONObject(0)
@@ -99,6 +101,16 @@ public class PhotoStreamActivity extends AppCompatActivity {
                         photo.lastCommentText = photoJSON.getJSONObject("comments")
                                                         .getJSONArray("data")
                                                         .getJSONObject(0)
+                                                        .getString("text");
+                        // cheating, second to last comment info
+                        photo.secondToLastCommentUsername = photoJSON.getJSONObject("comments")
+                                                            .getJSONArray("data")
+                                                            .getJSONObject(1)
+                                                            .getJSONObject("from")
+                                                            .getString("username");
+                        photo.secondToLastCommentText = photoJSON.getJSONObject("comments")
+                                                        .getJSONArray("data")
+                                                        .getJSONObject(1)
                                                         .getString("text");
 
                         //if I ever wanted to handle all of the comments, start here
