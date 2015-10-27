@@ -9,16 +9,23 @@ Time Spent: ~15 hours
 * [x] User can scroll through current popular photos from Instagram
 * [x] For each photo displayed, user can see the following details:
   * [x] Graphic, Caption, Username
-  * [x] (Optional) relative timestamp, like count, user profile image
-* [x] (Optional) *Advanced*: Add pull-to-refresh for popular stream with [SwipeRefreshLayout](http://guides.codepath.com/android/Implementing-Pull-to-Refresh-Guide)
-* [x] (Optional) *Advanced*: Show latest comment for each photo (bonus: show last 2 comments)
-* [x] (Optional) *Advanced*: Display each user profile image using a RoundedImageView
-* [x] (Optional) *Advanced*: Display a nice default placeholder graphic for each image during loading (read more about Picasso)
-* [x] (Optional) *Advanced*: Improve the user interface through styling and coloring
+  * [x] *(Optional)* relative timestamp, like count, user profile image
+* [x] *(Optional)* *Advanced*: Add pull-to-refresh for popular stream with [SwipeRefreshLayout](http://guides.codepath.com/android/Implementing-Pull-to-Refresh-Guide)
+* [x] *(Optional)* *Advanced*: Show latest comment for each photo (bonus: show last 2 comments)
+* [x] *(Optional)* *Advanced*: Display each user profile image using a RoundedImageView
+* [x] *(Optional)* *Advanced*: Display a nice default placeholder graphic for each image during loading (read more about Picasso)
+* [x] *(Optional)* *Advanced*: Improve the user interface through styling and coloring
 
 ## Notes:
 
 There's [a plugin for Android Studio](https://github.com/konifar/android-material-design-icon-generator-plugin) to handle icons from the Material Design library which makes life immensely easier. My relative layout started to get very large by the end and I wonder if there isn't a better way to organize it. I didn't have time to implement comments as a separate class. I could not figure out why the api does not return the actual dimensions of the photos so I can size my views properly... every photo is sent with height of 640 even though the actual dimensions vary since Instagram no longer enforces square photos. I never want to look at another photo of a Kardashian.
+
+## Libraries Used
+
+[Android Material Design Icon Generator Plugin](https://github.com/konifar/android-material-design-icon-generator-plugin) 
+[Android Async Http Client](https://github.com/AsyncHttpClient/async-http-client)
+[Picasso](http://square.github.io/picasso/)
+[Rounded Image View](https://github.com/vinc3m1/RoundedImageView)
 
 ## Walkthrough of all user stories:
 
